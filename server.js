@@ -103,6 +103,30 @@ app.post("/api/update-review", (request, response) => {
   );
 });
 
+// It's done when the /api/movie/:id route deletes a route when tested using Insomnia.
+app.delete("/api/movie/:id", (request, response) => {
+  const { id } = request.params;
+  console.log("Incomming DELETE request to /api/movie with id:", id);
+
+  // talking to db and deleting record there
+  db.query("DELETE from movies WHERE id = ?", id, (error, result) => {
+    console.log(error, result);
+    if (error) {
+      response.status(500).send("Error deleting a record");
+    } else {
+      if (result.affectedRows === 1) {
+        response.status(204).json({
+          status: "success",
+        });
+      } else {
+        response
+          .status(500)
+          .send("No records were deleted. Please check the movie id exists.");
+      }
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log("Server running on port", port, "🚀");
 });
