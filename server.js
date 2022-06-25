@@ -31,6 +31,32 @@ app.get("/api/movies", (request, response) => {
   });
 });
 
+// It's done when the /api/add-movie route successfully adds a movie when tested using Insomnia.
+app.post("/api/add-movie", (request, response) => {
+  console.log("Incomming POST request to /api/add-movie", request.body);
+  const { movie_name } = request.body;
+
+  // Add it to SQL database
+  db.query(
+    "INSERT INTO movies (movie_name) VALUES (?)",
+    movie_name,
+    (err, result) => {
+      if (err) {
+        response.status(500).send("Error adding movie");
+      } else {
+        if (result.affectedRows === 1) {
+          response.status(201).json({
+            status: "success",
+            body: request.body,
+          });
+        } else {
+          response.status(500).send("Unable to create new movie record");
+        }
+      }
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log("Server running on port", port, "🚀");
 });
