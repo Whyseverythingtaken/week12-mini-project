@@ -1,0 +1,23 @@
+{
+  "name": "week12-mini-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Whyseverythingtaken/week12-mini-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Whyseverythingtaken/week12-mini-project/issues"
+  },
+  "homepage": "https://github.com/Whyseverythingtaken/week12-mini-project#readme",
+  "dependencies": {
+    "jest": "^28.1.1",
+    "mysql2": "^2.3.3"
+  }
+}
